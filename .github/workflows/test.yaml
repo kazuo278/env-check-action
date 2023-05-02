@@ -1,0 +1,19 @@
+name: test
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: envs is action
+        uses: ./.
+      - name: envs is worlflow
+        run: env | sort
+      - name: step summary
+        run: cat $GITHUB_STEP_SUMMARY
+      - name: state
+        run: cat $GITHUB_STATE

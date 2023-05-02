@@ -1,0 +1,7 @@
+name: env check action
+description: 'Hello'
+runs:
+  using: composite
+  steps:
+    - run: env | sort
+      shell: bash
