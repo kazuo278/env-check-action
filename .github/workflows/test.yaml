@@ -13,6 +13,8 @@ jobs:
         uses: ./.
       - name: envs in action via repo path
         uses: kazuo278/env-check-action@main
+      - name: envs in action via repo path
+        uses: kazuo278/env-check-action@feature/test
       - name: envs in worlflow
         run: env | sort
       - name: step summary
