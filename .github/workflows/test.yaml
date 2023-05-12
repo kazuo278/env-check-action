@@ -11,10 +11,12 @@ jobs:
       - uses: actions/checkout@v3
       - name: envs in action via file path
         uses: ./.
-      - name: envs in action via repo path
+      - name: envs in action via repo path of main branch
         uses: kazuo278/env-check-action@main
-      - name: envs in action via repo path
+      - name: envs in action via repo path of feature/test branch
         uses: kazuo278/env-check-action@feature/test
+      - name: envs in action via repo path of tags
+        uses: kazuo278/env-check-action@v1
       - name: envs in worlflow
         run: env | sort
       - name: step summary
