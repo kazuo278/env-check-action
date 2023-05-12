@@ -9,9 +9,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - name: envs is action
+      - name: envs in action via file path
         uses: ./.
-      - name: envs is worlflow
+      - name: envs in action via repo path
+        uses: kazuo278/env-check-action@main
+      - name: envs in worlflow
         run: env | sort
       - name: step summary
         run: cat $GITHUB_STEP_SUMMARY
