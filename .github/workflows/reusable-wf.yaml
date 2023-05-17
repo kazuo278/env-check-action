@@ -1,0 +1,22 @@
+name: reusable workflow for check env
+
+on:
+  workflow_call:
+
+jobs:
+  reuseable-vm-test:
+    runs-on: ubuntu-22.04
+    env:
+      MY_REUSABLE_JOB_ENV: my_job_env
+    steps:
+      - name: envs in action via repo path of main branch
+        uses: kazuo278/env-check-action@main
+  reuseable-container-test:
+    runs-on: ubuntu-22.04
+    env:
+      MY_REUSABLE_JOB_ENV: my_job_env
+    container:
+      image: ubuntu:latest
+    steps:
+      - name: envs in action via repo path of main branch
+        uses: kazuo278/env-check-action@main
