@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
+      - name: persist envs via $GITHUB_ENV
+        run: cat .ci_env >> $GITHUB_ENV
       - name: envs in action via file path
         uses: ./.
       - name: envs in action via repo path of main branch

@@ -3,5 +3,9 @@ description: 'Hello'
 runs:
   using: composite
   steps:
-    - run: env | sort
+    - name: show envs in action
+      run: env | sort
+      shell: bash
+    - name: show $GITHUB_ENV
+      run: cat $GITHUB_ENV
       shell: bash
