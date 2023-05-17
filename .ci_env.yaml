@@ -1,0 +1,5 @@
+  shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+  env:
+    CI_FILE_AAA: CI_FILE_AAA_VALUE
+    CI_FILE_BBB: CI_FILE_BBB_VALUE
+    CI_FILE_URL: http://localhost:8080/test/

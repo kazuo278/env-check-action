@@ -5,8 +5,10 @@ on:
   push:
 
 jobs:
-  test:
+  test1:
     runs-on: ubuntu-22.04
+    env:
+      MY_JOB_ENV: my_job_env
     steps:
       - uses: actions/checkout@v3
       - name: persist envs via $GITHUB_ENV
@@ -25,3 +27,28 @@ jobs:
         run: cat $GITHUB_STEP_SUMMARY
       - name: state
         run: cat $GITHUB_STATE
+      - name: parse yaml to json
+        run: |-
+          ruby -rjson -ryaml -e 'print YAML.load(STDIN.read).to_json' < $GITHUB_ENV
+      - name: show '${{ env }}'
+        run: echo "${{ env }}"
+        env:
+          MY_STEP_ENV: my_step_env
+      - name: envs in action via file path with step env
+        uses: ./.
+        env:
+          MY_RENAMED_STEP_ENV: ${{ env.CI_FILE_AAA }}
+      # - name: parse yaml to key=value
+      #   run: |-
+      #     ruby -rjson -ryaml -e 'print YAML.load(STDIN.read).to_json' < $GITHUB_ENV \
+      #       | jq -r  '.env | to_entries[] | .key + "=" + (.value | tostring)'
+  test2:
+    runs-on: ubuntu-22.04
+    needs: [ test1 ]
+    steps:
+      - uses: actions/checkout@v3
+      - name: persist an env via $GITHUB_ENV
+        run: echo "CI_ENV_TEST1=TEST1" >> $GITHUB_ENV
+        # GITHUB_ENVはJOB間を引き継げない
+      - name: envs in action via file path
+        uses: ./.
